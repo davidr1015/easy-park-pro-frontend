@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router'
-import { Navbar, Background } from '../components'
-import { AuthContext } from '../context/authProvider'
+import { Navbar, Background } from '@/components'
+import { AuthContext } from '@/context/authProvider'
 import { useContext, useEffect } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 

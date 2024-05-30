@@ -1,5 +1,6 @@
+import { Button } from 'flowbite-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
-import { FloatingInput } from '../../components'
+import { FloatingInput } from '@/components'
 import { PATHS } from '../../constants/routePaths'
 import { Controller, useForm } from 'react-hook-form'
 import { ENDPOINTS } from '../../constants/endpoints'

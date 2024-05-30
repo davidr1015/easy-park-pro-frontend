@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { FloatingInput } from '../../components'
+import { FloatingInput } from '@/components'
 import { Button } from 'flowbite-react'
 import { useLogin } from './hooks/useLogin'
 import { Controller } from 'react-hook-form'
@@ -17,8 +17,7 @@ export function Login () {
         <div className='h-36 w-full lg:order-1 lg:h-full lg:w-2/3 lg:pl-4 xl:w-1/2'>
           <img
             className='max-h-full w-full rounded-lg object-cover object-center lg:h-[25rem] xl:h-[30rem]'
-            src='https://cdn.pixabay.com/photo/2017/08/02/01/11/people-2569404_1280.jpg'
-            alt='A woman using a computer'
+            src='https://images.unsplash.com/photo-1542128962-9d50ad7bf014?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           />
         </div>
 

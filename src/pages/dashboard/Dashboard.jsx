@@ -1,11 +1,11 @@
-import { DataTable, Card, EmployeesIcon, EquipmentIcon, LoanIcon } from '../../components'
-
+import { DataTable, Card, EmployeesIcon, EquipmentIcon, LoanIcon } from '@/components'
 
 import { DashboardICon } from '../../components/ui/Icons'
 import { useEffect } from 'react'
 
+
 export function Dashboard () {
-  
+ 
 
   return (
     <>
@@ -16,13 +16,11 @@ export function Dashboard () {
         <div className='grid max-w-full auto-rows-min px-3 lg:grid-cols-3 gap-6 '>
 
           <Card label='Equipos registrados' icon={<EquipmentIcon />}> 2</Card>
-          <Card label='Empleados registrados' icon={<EmployeesIcon />}> 4</Card>
-          <Card label='Prestamos registrados' icon={<LoanIcon />}> 8</Card>
+          <Card label='Empleados registrados' icon={<EmployeesIcon />}> 2</Card>
+          <Card label='Prestamos registrados' icon={<LoanIcon />}> 2</Card>
         </div>
 
-
-      
-
+        
       </div>
 
     </>

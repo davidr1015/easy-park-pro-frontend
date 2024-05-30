@@ -1,6 +1,6 @@
 import { ENDPOINTS } from '../constants/endpoints'
 import { createContext, useReducer } from 'react'
-import { initialState, authReducer } from './reducers'
+import { initialState, authReducer } from '@/context/reducers'
 
 export const AuthContext = createContext({})
 

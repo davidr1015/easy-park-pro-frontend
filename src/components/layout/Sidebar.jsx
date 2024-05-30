@@ -9,7 +9,7 @@ import {
   MenuOpenICon,
   MenuCloseICon,
   AdminIcon
-} from '../../components'
+} from '@/components'
 import { PATHS } from '../../constants/routePaths'
 import { AuthContext } from '../../context/authProvider'
 import { ReportIcon, ReportsIcon, ThirdIcon } from '../ui/Icons'
@@ -67,79 +67,37 @@ export function Sidebar () {
             Dashboard
           </NavLink>
         </li>
-        <li>
-          <NavLink
-            to={PATHS.PRIVATE.EQUIPMENTS.path}
-            className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
-          >
-            <EquipmentIcon />
-            Equipos
-          </NavLink>
-        </li>
-        <li>
-          <NavLink
-            to={PATHS.PRIVATE.EMPLOYEES.path}
-            className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
-          >
-            <EmployeesIcon />
-            Empleados
-          </NavLink>
-        </li>
-
-        {isAdmin &&
-          <li>
-            <NavLink
-              to={PATHS.PRIVATE.THIRDS.path}
-              className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
-            >
-              <ThirdIcon />
-              Terceros
-            </NavLink>
-          </li>}
 
         <li>
           <NavLink
-            to={PATHS.PRIVATE.LOAN.path}
+            to={PATHS.PRIVATE.PARKS.path}
             className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
           >
-            <LoanIcon />
-            Préstamos
+            <DashboardICon />
+            Explorar Parqueaderos
           </NavLink>
         </li>
-        {isAdmin &&
-          <li>
-            <NavLink
-              to={PATHS.PRIVATE.MAINTENANCES.path}
-              className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
-            >
-              <MaintanceIcon />
-              Mantenimientos
-            </NavLink>
-          </li>}
 
-        {isAdmin &&
-          <li>
-            <ul className='pt-4 mt-4 space-y-2 font-medium border-t border-gray-200 dark:border-gray-700'>
-              <li>
-                <NavLink
-                  to={PATHS.PRIVATE.ADMIN.path}
-                  className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
-                >
-                  <AdminIcon />
-                  Administración
-                </NavLink>
-              </li>
-              <li>
-                <NavLink
-                  to={PATHS.PRIVATE.REPORTS.path}
-                  className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
-                >
-                  <ReportsIcon />
-                  Reportes
-                </NavLink>
-              </li>
-            </ul>
-          </li>}
+        <li>
+          <NavLink
+            to={PATHS.PRIVATE.CARS.path}
+            className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
+          >
+            <DashboardICon />
+            Mis autos
+          </NavLink>
+        </li>
+
+        <li>
+          <NavLink
+            to={PATHS.PRIVATE.DASHBOARD.path}
+            className='flex items-center gap-2 rounded-md px-4 py-3 hover:border hover:bg-secondary hover:bg-noise hover:shadow-lg dark:hover:border-secondary-dark dark:hover:bg-secondary-dark'
+          >
+            <DashboardICon />
+            Mis parqueaderos favoritos
+          </NavLink>
+        </li>
+        
 
       </ul>
     </nav>

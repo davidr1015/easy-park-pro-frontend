@@ -1,0 +1,957 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 16.2
+-- Dumped by pg_dump version 16.2
+
+-- Started on 2024-04-02 08:00:34
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- TOC entry 4 (class 2615 OID 2200)
+-- Name: public; Type: SCHEMA; Schema: -; Owner: pg_database_owner
+--
+
+CREATE SCHEMA public;
+
+
+ALTER SCHEMA public OWNER TO pg_database_owner;
+
+--
+-- TOC entry 4944 (class 0 OID 0)
+-- Dependencies: 4
+-- Name: SCHEMA public; Type: COMMENT; Schema: -; Owner: pg_database_owner
+--
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 215 (class 1259 OID 16399)
+-- Name: cargos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.cargos (
+    id integer NOT NULL,
+    cargo character varying(225) NOT NULL,
+    trial223 character(1)
+);
+
+
+ALTER TABLE public.cargos OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16402)
+-- Name: cargos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.cargos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.cargos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4945 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: cargos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.cargos_id_seq OWNED BY public.cargos.id;
+
+
+--
+-- TOC entry 217 (class 1259 OID 16403)
+-- Name: categoria; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.categoria (
+    id integer NOT NULL,
+    categoria character varying(255) NOT NULL,
+    trial223 character(1)
+);
+
+
+ALTER TABLE public.categoria OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16406)
+-- Name: categoria_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.categoria_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.categoria_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4946 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: categoria_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.categoria_id_seq OWNED BY public.categoria.id;
+
+
+--
+-- TOC entry 219 (class 1259 OID 16407)
+-- Name: empleado; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.empleado (
+    id integer NOT NULL,
+    cedula integer NOT NULL,
+    nombre character varying(255) NOT NULL,
+    apellido character varying(255) NOT NULL,
+    correo character varying(255),
+    id_rol integer DEFAULT 1 NOT NULL,
+    id_empresa integer DEFAULT 1 NOT NULL,
+    password character varying(255) NOT NULL,
+    activo smallint DEFAULT 0 NOT NULL,
+    telefono character varying(55) NOT NULL,
+    direccion character varying(55) NOT NULL,
+    ciudad character varying(55) NOT NULL,
+    token_verificacion character varying(255),
+    id_cargo integer DEFAULT 1 NOT NULL,
+    estado character varying(225),
+    trial223 character(1)
+);
+
+
+ALTER TABLE public.empleado OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16416)
+-- Name: empleado_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.empleado_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.empleado_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4947 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: empleado_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.empleado_id_seq OWNED BY public.empleado.id;
+
+
+--
+-- TOC entry 221 (class 1259 OID 16417)
+-- Name: empresa; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.empresa (
+    id integer NOT NULL,
+    nit integer NOT NULL,
+    razon_social character varying(255) NOT NULL,
+    direccion character varying(255) NOT NULL,
+    telefono character varying(255) NOT NULL,
+    representante_legal character varying(255) NOT NULL,
+    logotipo character varying(255),
+    pais text NOT NULL,
+    ciudad text NOT NULL,
+    trial223 character(1)
+);
+
+
+ALTER TABLE public.empresa OWNER TO postgres;
+
+--
+-- TOC entry 222 (class 1259 OID 16422)
+-- Name: empresa_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.empresa_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.empresa_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4948 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: empresa_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.empresa_id_seq OWNED BY public.empresa.id;
+
+
+--
+-- TOC entry 223 (class 1259 OID 16423)
+-- Name: equipo; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.equipo (
+    id integer NOT NULL,
+    num_activo integer NOT NULL,
+    marca character varying(255) NOT NULL,
+    modelo character varying(255) NOT NULL,
+    serial character varying(255) NOT NULL,
+    estado character varying(255),
+    especificaciones character varying(255),
+    id_categoria integer NOT NULL,
+    activo integer,
+    trial223 character(1)
+);
+
+
+ALTER TABLE public.equipo OWNER TO postgres;
+
+--
+-- TOC entry 224 (class 1259 OID 16428)
+-- Name: equipo_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.equipo_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.equipo_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4949 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: equipo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.equipo_id_seq OWNED BY public.equipo.id;
+
+
+--
+-- TOC entry 225 (class 1259 OID 16429)
+-- Name: mantenimiento; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.mantenimiento (
+    id integer NOT NULL,
+    id_equipo integer NOT NULL,
+    fecha_mantenimiento date NOT NULL,
+    descripcion_mantenimiento character varying(255) NOT NULL,
+    trial226 character(1)
+);
+
+
+ALTER TABLE public.mantenimiento OWNER TO postgres;
+
+--
+-- TOC entry 226 (class 1259 OID 16432)
+-- Name: mantenimiento_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.mantenimiento_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.mantenimiento_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4950 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: mantenimiento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.mantenimiento_id_seq OWNED BY public.mantenimiento.id;
+
+
+--
+-- TOC entry 227 (class 1259 OID 16433)
+-- Name: prestamo; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.prestamo (
+    id integer NOT NULL,
+    fecha_inicio date NOT NULL,
+    fecha_devolucion_esperada date,
+    fecha_devolucion_real date,
+    estado character varying(255) NOT NULL,
+    id_empleado integer NOT NULL,
+    id_responsable integer NOT NULL,
+    id_equipo integer NOT NULL,
+    cargador smallint NOT NULL,
+    observaciones character varying(255),
+    trial226 character(1)
+);
+
+
+ALTER TABLE public.prestamo OWNER TO postgres;
+
+--
+-- TOC entry 228 (class 1259 OID 16438)
+-- Name: prestamo_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.prestamo_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.prestamo_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4951 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: prestamo_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.prestamo_id_seq OWNED BY public.prestamo.id;
+
+
+--
+-- TOC entry 229 (class 1259 OID 16439)
+-- Name: rol; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.rol (
+    id integer NOT NULL,
+    descripcion character varying(55) NOT NULL,
+    trial226 character(1)
+);
+
+
+ALTER TABLE public.rol OWNER TO postgres;
+
+--
+-- TOC entry 230 (class 1259 OID 16442)
+-- Name: rol_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.rol_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.rol_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4952 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: rol_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.rol_id_seq OWNED BY public.rol.id;
+
+
+--
+-- TOC entry 231 (class 1259 OID 16443)
+-- Name: rol_permisos; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.rol_permisos (
+    id integer NOT NULL,
+    id_rol integer NOT NULL,
+    modulo integer NOT NULL,
+    permiso_creacion smallint NOT NULL,
+    permiso_edicion smallint NOT NULL,
+    permiso_eliminacion smallint NOT NULL,
+    permiso_lectura smallint NOT NULL,
+    trial226 character(1)
+);
+
+
+ALTER TABLE public.rol_permisos OWNER TO postgres;
+
+--
+-- TOC entry 232 (class 1259 OID 16446)
+-- Name: rol_permisos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.rol_permisos_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.rol_permisos_id_seq OWNER TO postgres;
+
+--
+-- TOC entry 4953 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: rol_permisos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.rol_permisos_id_seq OWNED BY public.rol_permisos.id;
+
+
+--
+-- TOC entry 4728 (class 2604 OID 16447)
+-- Name: cargos id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cargos ALTER COLUMN id SET DEFAULT nextval('public.cargos_id_seq'::regclass);
+
+
+--
+-- TOC entry 4729 (class 2604 OID 16448)
+-- Name: categoria id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categoria ALTER COLUMN id SET DEFAULT nextval('public.categoria_id_seq'::regclass);
+
+
+--
+-- TOC entry 4730 (class 2604 OID 16449)
+-- Name: empleado id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empleado ALTER COLUMN id SET DEFAULT nextval('public.empleado_id_seq'::regclass);
+
+
+--
+-- TOC entry 4735 (class 2604 OID 16450)
+-- Name: empresa id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empresa ALTER COLUMN id SET DEFAULT nextval('public.empresa_id_seq'::regclass);
+
+
+--
+-- TOC entry 4736 (class 2604 OID 16451)
+-- Name: equipo id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.equipo ALTER COLUMN id SET DEFAULT nextval('public.equipo_id_seq'::regclass);
+
+
+--
+-- TOC entry 4737 (class 2604 OID 16452)
+-- Name: mantenimiento id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.mantenimiento ALTER COLUMN id SET DEFAULT nextval('public.mantenimiento_id_seq'::regclass);
+
+
+--
+-- TOC entry 4738 (class 2604 OID 16453)
+-- Name: prestamo id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.prestamo ALTER COLUMN id SET DEFAULT nextval('public.prestamo_id_seq'::regclass);
+
+
+--
+-- TOC entry 4739 (class 2604 OID 16454)
+-- Name: rol id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rol ALTER COLUMN id SET DEFAULT nextval('public.rol_id_seq'::regclass);
+
+
+--
+-- TOC entry 4740 (class 2604 OID 16455)
+-- Name: rol_permisos id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rol_permisos ALTER COLUMN id SET DEFAULT nextval('public.rol_permisos_id_seq'::regclass);
+
+
+--
+-- TOC entry 4921 (class 0 OID 16399)
+-- Dependencies: 215
+-- Data for Name: cargos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.cargos VALUES (1, 'DESARROLLO', 'T');
+INSERT INTO public.cargos VALUES (2, 'ADMINISTRACION', NULL);
+INSERT INTO public.cargos VALUES (3, 'LIDER', NULL);
+INSERT INTO public.cargos VALUES (4, 'CONTABILIDAD', NULL);
+INSERT INTO public.cargos VALUES (5, 'GERENCIA', NULL);
+
+
+--
+-- TOC entry 4923 (class 0 OID 16403)
+-- Dependencies: 217
+-- Data for Name: categoria; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.categoria VALUES (16, 'ALMACENAMIENTOS', 'T');
+INSERT INTO public.categoria VALUES (42, 'TABLETS', 'T');
+INSERT INTO public.categoria VALUES (45, 'PPS', 'T');
+INSERT INTO public.categoria VALUES (46, 'CELULARES', NULL);
+
+
+--
+-- TOC entry 4925 (class 0 OID 16407)
+-- Dependencies: 219
+-- Data for Name: empleado; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.empleado VALUES (43, 100300215, 'GUSTAVO', 'GARNAU', 'DMDR151010@GMAIL.COM', 1, 1, '$2b$10$DBewxWmmj9UHmFXAAy93VuxzWDaM4xqIr.fhx7//4rV8XscjCJ2we', 0, '3024481093', 'ENDUMUNDOLOPEZ', 'MONTERIA', '69a090a8-d2df-4574-9504-e341ed475c36', 1, NULL, NULL);
+INSERT INTO public.empleado VALUES (45, 1003002515, 'GUSTAVO', 'GARNAU', 'DMDR15221010@GMAIL.COM', 1, 1, '$2b$10$ZfABuTRc2ewMEcs9GstdkOriX0xOnLXUzlTMFC8nsxw66IN/Aowgu', 0, '3024481093', 'ENDUMUNDOLOPEZ', 'MONTERIA', 'edb6ba42-93a7-49d0-8d69-9a46457382de', 1, NULL, NULL);
+INSERT INTO public.empleado VALUES (46, 156329874, 'ESTEBAN', 'ARRIETA', 'DMDR1233@GMAIL.COM', 1, 1, '$2b$10$B/cptVHZHoMDOXWwRWZMF.Itpz0iOF5VH9MBys1.wWQuyJfWMUgkC', 0, '3225469851', 'RECREO', 'MONTERIA', '9ab3bcca-0488-4860-af5b-be982876222c', 1, NULL, NULL);
+INSERT INTO public.empleado VALUES (29, 1003004328, 'DAVID RICARDO', 'DELGADO MEDINA', 'DMDR1015@GMAIL.COM', 1, 1, '$2b$10$Y8g7IkrafjgbnuanQjhd8O34rR9jZLRP1IJ7IG1UQ//VSQN/Ht9y.', 1, '3196846680', 'CANTACLARO', 'MONTERIA', '7da560ad-f84c-4c59-8b0f-b7b548a70681', 1, '', 'T');
+INSERT INTO public.empleado VALUES (37, 100300254, 'GUSTAVO', 'GARNAU', 'DMDR1010@GMAIL.COM', 2, 1, '$2b$10$bDyM8wnEg7ydSzuGhkUyv.1FqzZ9gQRGVyyba0LTPHPwTw2GWryE.', 1, '3024481093', 'ENDUMUNDOLOPEZ', 'MONTERIA', NULL, 1, NULL, NULL);
+INSERT INTO public.empleado VALUES (42, 12569854, 'ARTURO', 'PEREZ', 'APEREZ@GMAIL.COM', 1, 1, '$2b$10$aSFzD1UOp3/UFKnezYX0IuRUsgev9lOnyeoj77JcfCjc9P9YDkur.', 0, '3259874562', '123456789', 'BOGOTA', '74577b89-01a1-49ac-8b9b-81d63c3e6edc', 1, NULL, NULL);
+
+
+--
+-- TOC entry 4927 (class 0 OID 16417)
+-- Dependencies: 221
+-- Data for Name: empresa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.empresa VALUES (1, 1, 'TecnoEmprendedores', 'Carrera 123 # 456', '+57 123 456 7890', 'Juan David Pérez', 'logo_tecnOEM.png', 'colombia', 'monteria
+', 'T');
+INSERT INTO public.empresa VALUES (2, 2, 'InnoDigital', 'Calle 789 # 012', '+57 456 789 1234', 'María Luisa Gómez', 'logo_innoDigital.png', 'colombia', 'bogota', 'T');
+
+
+--
+-- TOC entry 4929 (class 0 OID 16423)
+-- Dependencies: 223
+-- Data for Name: equipo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.equipo VALUES (8, 13, 'MC', 'MD', 'SR', '2', 'ESPC', 16, 0, 'T');
+INSERT INTO public.equipo VALUES (12, 4, 'HP', 'BOOK HHTCBP3465', '100352130G', '3', 'I9 115123', 42, NULL, NULL);
+INSERT INTO public.equipo VALUES (13, 8, 'AZUS', 'BOOK HHTCBP3465', '100352130G', '3', 'I9 115123', 42, NULL, NULL);
+INSERT INTO public.equipo VALUES (18, 15, 'DELL', 'IDEAPAD', 'SNJGD2729829903ZL', '2', 'RAM: 32GB PROCESADOR: RYZEN 9', 46, NULL, NULL);
+INSERT INTO public.equipo VALUES (14, 9, 'AZUS', 'BOOK HHTCBP3465', '100352130G', '2', 'I7 115123', 42, NULL, NULL);
+
+
+--
+-- TOC entry 4931 (class 0 OID 16429)
+-- Dependencies: 225
+-- Data for Name: mantenimiento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.mantenimiento VALUES (1, 3, '2023-02-15', 'Limpieza general, actualización BIOS', 'T');
+
+
+--
+-- TOC entry 4933 (class 0 OID 16433)
+-- Dependencies: 227
+-- Data for Name: prestamo; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.prestamo VALUES (8, '2024-03-26', NULL, NULL, 'ENTREGA DOTACION', 29, 29, 8, 1, 'NINGUNA', 'T');
+INSERT INTO public.prestamo VALUES (24, '2023-01-05', '2023-01-19', '2023-01-19', '1', 29, 37, 8, 1, 'Prestamo para curso de Python', NULL);
+INSERT INTO public.prestamo VALUES (25, '2023-02-10', '2023-02-24', '2023-02-24', '1', 29, 37, 12, 1, 'Prestamo para proyecto de investigación', NULL);
+INSERT INTO public.prestamo VALUES (26, '2023-03-15', '2023-03-31', '2023-03-31', '1', 29, 37, 13, 1, 'Prestamo para tesis de grado', NULL);
+INSERT INTO public.prestamo VALUES (27, '2023-04-01', '2023-04-15', NULL, '1', 29, 37, 14, 1, 'Prestamo para taller de programación', NULL);
+INSERT INTO public.prestamo VALUES (28, '2023-05-05', '2023-05-19', NULL, '1', 29, 37, 8, 1, 'Prestamo para curso de diseño web', NULL);
+INSERT INTO public.prestamo VALUES (29, '2023-06-10', '2023-06-24', NULL, '1', 29, 37, 12, 1, 'Prestamo para diplomado en marketing digital', NULL);
+INSERT INTO public.prestamo VALUES (31, '2023-08-05', '2023-08-19', NULL, '1', 29, 37, 14, 1, 'Prestamo para curso de fotografía', NULL);
+INSERT INTO public.prestamo VALUES (32, '2023-09-10', '2023-09-24', NULL, '1', 29, 37, 8, 1, 'Prestamo para curso de guitarra', NULL);
+INSERT INTO public.prestamo VALUES (33, '2023-10-01', '2023-10-15', NULL, '1', 29, 37, 12, 1, 'Prestamo para curso de baile', NULL);
+INSERT INTO public.prestamo VALUES (34, '2023-11-05', '2023-11-19', NULL, '1', 29, 37, 13, 1, 'Prestamo para curso de cocina', NULL);
+INSERT INTO public.prestamo VALUES (35, '2023-12-10', '2023-12-24', NULL, '1', 29, 37, 14, 1, 'Prestamo para curso de primeros auxilios', NULL);
+INSERT INTO public.prestamo VALUES (36, '2024-01-05', '2024-01-19', NULL, '1', 29, 37, 8, 1, 'Prestamo para curso de liderazgo', NULL);
+INSERT INTO public.prestamo VALUES (38, '2024-03-15', '2024-03-31', NULL, '1', 29, 37, 13, 1, 'Prestamo para curso de robótica', NULL);
+INSERT INTO public.prestamo VALUES (30, '2023-07-01', '2023-07-15', NULL, '1', 37, 37, 13, 1, 'Prestamo para curso de inglés', NULL);
+INSERT INTO public.prestamo VALUES (37, '2024-02-10', '2024-02-24', NULL, '1', 37, 37, 12, 1, 'Prestamo para curso de oratoria', NULL);
+INSERT INTO public.prestamo VALUES (39, '2024-04-01', '2024-04-26', NULL, '1', 42, 29, 18, 0, 'PARA PRUEBA DE APp', NULL);
+INSERT INTO public.prestamo VALUES (40, '2024-04-01', '2024-04-26', NULL, '1', 42, 29, 18, 0, 'PARA PRUEBA DE APp', NULL);
+INSERT INTO public.prestamo VALUES (41, '2024-04-01', '2024-04-12', NULL, '1', 46, 29, 14, 1, 'PRUEBa', NULL);
+
+
+--
+-- TOC entry 4935 (class 0 OID 16439)
+-- Dependencies: 229
+-- Data for Name: rol; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.rol VALUES (1, 'Administrador', 'T');
+INSERT INTO public.rol VALUES (2, 'responsable', 'T');
+INSERT INTO public.rol VALUES (3, 'colaborador', 'T');
+
+
+--
+-- TOC entry 4937 (class 0 OID 16443)
+-- Dependencies: 231
+-- Data for Name: rol_permisos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO public.rol_permisos VALUES (1, 1, 1, 1, 1, 1, 1, 'T');
+INSERT INTO public.rol_permisos VALUES (2, 1, 2, 1, 0, 0, 1, 'T');
+INSERT INTO public.rol_permisos VALUES (3, 1, 3, 1, 0, 1, 1, 'T');
+
+
+--
+-- TOC entry 4954 (class 0 OID 0)
+-- Dependencies: 216
+-- Name: cargos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.cargos_id_seq', 5, true);
+
+
+--
+-- TOC entry 4955 (class 0 OID 0)
+-- Dependencies: 218
+-- Name: categoria_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.categoria_id_seq', 46, true);
+
+
+--
+-- TOC entry 4956 (class 0 OID 0)
+-- Dependencies: 220
+-- Name: empleado_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.empleado_id_seq', 46, true);
+
+
+--
+-- TOC entry 4957 (class 0 OID 0)
+-- Dependencies: 222
+-- Name: empresa_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.empresa_id_seq', 2, true);
+
+
+--
+-- TOC entry 4958 (class 0 OID 0)
+-- Dependencies: 224
+-- Name: equipo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.equipo_id_seq', 18, true);
+
+
+--
+-- TOC entry 4959 (class 0 OID 0)
+-- Dependencies: 226
+-- Name: mantenimiento_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.mantenimiento_id_seq', 1, true);
+
+
+--
+-- TOC entry 4960 (class 0 OID 0)
+-- Dependencies: 228
+-- Name: prestamo_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.prestamo_id_seq', 41, true);
+
+
+--
+-- TOC entry 4961 (class 0 OID 0)
+-- Dependencies: 230
+-- Name: rol_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.rol_id_seq', 3, true);
+
+
+--
+-- TOC entry 4962 (class 0 OID 0)
+-- Dependencies: 232
+-- Name: rol_permisos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.rol_permisos_id_seq', 3, true);
+
+
+--
+-- TOC entry 4742 (class 2606 OID 16457)
+-- Name: cargos pk_cargos; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.cargos
+    ADD CONSTRAINT pk_cargos PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4745 (class 2606 OID 16459)
+-- Name: categoria pk_categoria; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.categoria
+    ADD CONSTRAINT pk_categoria PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4752 (class 2606 OID 16461)
+-- Name: empleado pk_empleado; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empleado
+    ADD CONSTRAINT pk_empleado PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4755 (class 2606 OID 16463)
+-- Name: empresa pk_empresa; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empresa
+    ADD CONSTRAINT pk_empresa PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4759 (class 2606 OID 16465)
+-- Name: equipo pk_equipo; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.equipo
+    ADD CONSTRAINT pk_equipo PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4762 (class 2606 OID 16467)
+-- Name: mantenimiento pk_mantenimiento; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.mantenimiento
+    ADD CONSTRAINT pk_mantenimiento PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4765 (class 2606 OID 16469)
+-- Name: prestamo pk_prestamo; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.prestamo
+    ADD CONSTRAINT pk_prestamo PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4767 (class 2606 OID 16471)
+-- Name: rol pk_rol; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rol
+    ADD CONSTRAINT pk_rol PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4769 (class 2606 OID 16473)
+-- Name: rol_permisos pk_rol_permisos; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rol_permisos
+    ADD CONSTRAINT pk_rol_permisos PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4746 (class 1259 OID 16474)
+-- Name: empleado_ibfk_3; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX empleado_ibfk_3 ON public.empleado USING btree (id_cargo);
+
+
+--
+-- TOC entry 4756 (class 1259 OID 16475)
+-- Name: equipo_fk; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX equipo_fk ON public.equipo USING btree (id_categoria);
+
+
+--
+-- TOC entry 4743 (class 1259 OID 16476)
+-- Name: idx_categoria; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_categoria ON public.categoria USING btree (categoria);
+
+
+--
+-- TOC entry 4747 (class 1259 OID 16477)
+-- Name: idx_cedula; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_cedula ON public.empleado USING btree (cedula);
+
+
+--
+-- TOC entry 4748 (class 1259 OID 16478)
+-- Name: idx_correo; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_correo ON public.empleado USING btree (correo);
+
+
+--
+-- TOC entry 4763 (class 1259 OID 16479)
+-- Name: idx_id_empleado; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_id_empleado ON public.prestamo USING btree (id_empleado);
+
+
+--
+-- TOC entry 4749 (class 1259 OID 16480)
+-- Name: idx_id_empresa; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_id_empresa ON public.empleado USING btree (id_empresa);
+
+
+--
+-- TOC entry 4760 (class 1259 OID 16481)
+-- Name: idx_id_equipo; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_id_equipo ON public.mantenimiento USING btree (id_equipo);
+
+
+--
+-- TOC entry 4750 (class 1259 OID 16482)
+-- Name: idx_id_rol; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX idx_id_rol ON public.empleado USING btree (id_rol);
+
+
+--
+-- TOC entry 4753 (class 1259 OID 16483)
+-- Name: idx_nit; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_nit ON public.empresa USING btree (nit);
+
+
+--
+-- TOC entry 4757 (class 1259 OID 16484)
+-- Name: idx_num_activo; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE UNIQUE INDEX idx_num_activo ON public.equipo USING btree (num_activo);
+
+
+--
+-- TOC entry 4770 (class 2606 OID 16485)
+-- Name: empleado empleado_ibfk_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empleado
+    ADD CONSTRAINT empleado_ibfk_1 FOREIGN KEY (id_rol) REFERENCES public.rol(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 4771 (class 2606 OID 16490)
+-- Name: empleado empleado_ibfk_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empleado
+    ADD CONSTRAINT empleado_ibfk_2 FOREIGN KEY (id_empresa) REFERENCES public.empresa(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 4772 (class 2606 OID 16495)
+-- Name: empleado empleado_ibfk_3; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.empleado
+    ADD CONSTRAINT empleado_ibfk_3 FOREIGN KEY (id_cargo) REFERENCES public.cargos(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 4773 (class 2606 OID 16500)
+-- Name: equipo equipo_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.equipo
+    ADD CONSTRAINT equipo_fk FOREIGN KEY (id_categoria) REFERENCES public.categoria(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 4774 (class 2606 OID 16505)
+-- Name: prestamo prestamo_ibfk_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.prestamo
+    ADD CONSTRAINT prestamo_ibfk_1 FOREIGN KEY (id_empleado) REFERENCES public.empleado(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 4775 (class 2606 OID 16510)
+-- Name: prestamo prestamo_ibfk_2; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.prestamo
+    ADD CONSTRAINT prestamo_ibfk_2 FOREIGN KEY (id_responsable) REFERENCES public.empleado(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 4776 (class 2606 OID 16515)
+-- Name: prestamo prestamo_ibfk_3; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.prestamo
+    ADD CONSTRAINT prestamo_ibfk_3 FOREIGN KEY (id_equipo) REFERENCES public.equipo(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+--
+-- TOC entry 4777 (class 2606 OID 16520)
+-- Name: rol_permisos rol_permisos_ibfk_1; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.rol_permisos
+    ADD CONSTRAINT rol_permisos_ibfk_1 FOREIGN KEY (id_rol) REFERENCES public.rol(id) ON UPDATE RESTRICT ON DELETE RESTRICT;
+
+
+-- Completed on 2024-04-02 08:00:34
+
+--
+-- PostgreSQL database dump complete
+--
+

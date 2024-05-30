@@ -1,3 +1,4 @@
+import { Button } from 'flowbite-react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ENDPOINTS } from '../../constants/endpoints'
 import { PATHS } from '../../constants/routePaths'

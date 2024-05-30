@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { Button, Checkbox } from 'flowbite-react'
-import { FloatingInput, AlertDialog } from '../../components'
+import { FloatingInput, AlertDialog } from '@/components'
 import { useSignup } from './hooks/useSignup'
 import { Controller } from 'react-hook-form'
 import { Toaster } from 'react-hot-toast'
@@ -18,8 +18,8 @@ export function SignUp () {
 
         <div className='px-10 py-5'>
           <h2 className='text-2xl font-semibold text-tertiary dark:text-white'>Solicita tu cuenta</h2>
-          <p className='mt-1 text-sm text-tertiary/60 dark:text-white/70'>
-            ¡Bienvenido! Por favor, ingresa tus datos para registrarte. Después de completar el formulario, tu solicitud será enviada a nuestro equipo de administradores para su revisión y aprobación
+          <p className='mt-1 text-sm text-dark/4. dark:text-white/70'>
+            ¡Bienvenido! Por favor, ingresa tus datos para registrarte.
           </p>
 
           <form
@@ -204,7 +204,7 @@ export function SignUp () {
                 <CheckboxForm
                   type='password'
                   className='flex flex-row-reverse gap-2 text-gray-800'
-                  label={<span>Acepto terminos y condiciones y autorizo el tratamiento de mis datos personales conforme a la <Link to={PATHS.TERMS.path} target='_blank' className='text-tertiary'>politica de privacidad y tratamiento de datos personales</Link></span>}
+                  label={<span>Acepto terminos y condiciones y autorizo el tratamiento de mis datos personales conforme a la politica de privacidad y tratamiento de datos personales</span>}
                   value={value}
                   onValueChange={onChange}
                   color={errors.terminos && 'error'}

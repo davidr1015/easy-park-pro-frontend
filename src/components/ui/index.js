@@ -1,4 +1,5 @@
 export { Background } from './Background'
 export { Card } from './Card'
+export { DataTable } from './DataTable'
 export { ToggleTheme } from './ToggleTheme'
 export * from './Icons'

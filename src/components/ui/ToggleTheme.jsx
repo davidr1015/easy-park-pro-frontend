@@ -1,5 +1,5 @@
-import { DarkIcon, LightIcon } from '../../components'
-import { useTheme } from '../../hooks'
+import { DarkIcon, LightIcon } from '@/components'
+import { useTheme } from '@/hooks'
 
 export function ToggleTheme () {
   const { theme, changeTheme } = useTheme()

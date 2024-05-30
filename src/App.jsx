@@ -1,13 +1,11 @@
-import LandingPage from './components/LandingPage'
+import { BrowserRoutes } from './Routes/routes'
 import { AuthProvider } from './context/authProvider'
-import {BrowserRoutes} from './Routes/routes'
 
-function App() {
-
+function App () {
   return (
     <AuthProvider>
-    <BrowserRoutes />
-  </AuthProvider>
+      <BrowserRoutes />
+    </AuthProvider>
   )
 }
 

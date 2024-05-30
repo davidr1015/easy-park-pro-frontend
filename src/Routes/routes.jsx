@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
-import { LoginLayout, DashboardLayout, LoadingLayout } from '../layout'
-import { PublicRoute, PrivateRoute } from '../Routes'
+import { LoginLayout, DashboardLayout, LoadingLayout } from '@/layout'
+import { PublicRoute, PrivateRoute } from '@/Routes'
 import { AuthContext } from '../context/authProvider'
 import { PATHS } from '../constants/routePaths'
 
@@ -48,7 +48,6 @@ export const BrowserRoutes = () => {
         <Route element={<LoginLayout />}>
           <Route path={PATHS.DEFAULTPAGE.path} element={PATHS.DEFAULTPAGE.element} />
           <Route path={PATHS.CONFIRM_EMAIL.path} element={PATHS.CONFIRM_EMAIL.element} />
-          <Route path={PATHS.TERMS.path} element={PATHS.TERMS.element} />
         </Route>
       </Routes>
     </HashRouter>
